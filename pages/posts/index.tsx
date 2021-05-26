@@ -24,11 +24,10 @@ const Posts = (): JSX.Element => {
       <h1>Posts</h1>
       {posts.length > 0
         ? posts.map((post) => (
-            <div key={post.alt} className="container">
+            <div className="container" key={post.alt}>
               <img src={post.fields.image} />
               <div className="post-container">
                 <h2>{post.fields.title}</h2>
-                <p>{post.fields.body.content[0].value}</p>
                 <p>{post.fields.date}</p>
               </div>
             </div>
