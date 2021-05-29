@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import React from 'react'
 
+import styles from './Layout.module.scss'
+
 interface LayoutProps {
   title?: string
   keywords?: string
@@ -20,7 +22,7 @@ export const Layout: React.FC<LayoutProps> = ({
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
     </Head>
-    <div>{children}</div>
+    <div className={styles.children}>{children}</div>
   </>
 )
 

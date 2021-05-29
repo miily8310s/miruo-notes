@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import Layout from '../components/Layout'
+import styles from '../components/Layout.module.scss'
 
 export const Home = (): JSX.Element => {
   return (
@@ -13,7 +14,7 @@ export const Home = (): JSX.Element => {
         width={200}
         height={200}
       />
-      <div className="container">
+      <div className={styles.container}>
         <Link href="/about">
           <a>About me</a>
         </Link>
@@ -22,21 +23,6 @@ export const Home = (): JSX.Element => {
         </Link>
       </div>
       <p>工事中。。。。</p>
-      <style>{`
-        body {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-        .container {
-          margin-top: 20px;
-          display: flex;
-          justify-content: space-evenly;
-        }
-        p {
-          text-align: center;
-        }
-      `}</style>
     </Layout>
   )
 }
