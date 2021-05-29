@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import React from 'react'
 
+import Header from './Header'
 import styles from './Layout.module.scss'
 
 interface LayoutProps {
@@ -22,6 +23,7 @@ export const Layout: React.FC<LayoutProps> = ({
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
     </Head>
+    <Header />
     <div className={styles.children}>{children}</div>
   </>
 )

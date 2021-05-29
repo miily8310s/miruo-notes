@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
+import Layout from '../../components/Layout'
 
 const client = require('contentful').createClient({
   space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
@@ -6,21 +7,28 @@ const client = require('contentful').createClient({
 })
 
 const Posts = (): JSX.Element => {
-  const fetchPosts = async() => {
+  const fetchPosts = async () => {
     const entries = await client.getEntries()
     return entries.items
   }
 
+  const getDate = (dateString: string) => {
+    const year = dateString.substr(0, 4) + '/'
+    const month = dateString.substr(4, 2) + '/'
+    const day = dateString.substr(6)
+    return year + month + day
+  }
+
   const [posts, setPosts] = useState([])
   useEffect(() => {
-    const getPosts = async() => {
+    const getPosts = async () => {
       const allPosts = await fetchPosts()
       setPosts([...allPosts])
     }
     getPosts()
-  },[])
+  }, [])
   return (
-    <>
+    <Layout>
       <h1>Posts</h1>
       {posts.length > 0
         ? posts.map((post) => (
@@ -28,7 +36,7 @@ const Posts = (): JSX.Element => {
               <img src={post.fields.image} />
               <div className="post-container">
                 <h2>{post.fields.title}</h2>
-                <p>{post.fields.date}</p>
+                <p>{getDate(post.fields.date)}</p>
               </div>
             </div>
           ))
@@ -41,6 +49,7 @@ const Posts = (): JSX.Element => {
           display: flex;
           height: 100px;
           cursor: pointer;
+          width: 90%;
           height: 200px;
           margin-bottom: 48px;
           margin: 36px 100px;
@@ -57,7 +66,7 @@ const Posts = (): JSX.Element => {
           margin-left: 10px;
         }
       `}</style>
-    </>
+    </Layout>
   )
 }
 
