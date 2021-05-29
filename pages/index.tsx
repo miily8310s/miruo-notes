@@ -1,13 +1,11 @@
-import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
 
+import Layout from '../components/Layout'
+
 export const Home = (): JSX.Element => {
   return (
-    <>
-      <Head>
-        <title>Miruo's Page</title>
-      </Head>
+    <Layout>
       <h1>Hello World!!</h1>
       <Image
         src="https://avatars.githubusercontent.com/u/42486288?v=4"
@@ -39,7 +37,7 @@ export const Home = (): JSX.Element => {
           text-align: center;
         }
       `}</style>
-    </>
+    </Layout>
   )
 }
 
