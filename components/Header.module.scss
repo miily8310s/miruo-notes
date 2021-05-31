@@ -4,20 +4,21 @@
   width: 100%;
   display: flex;
   align-items: center;
-  background-color: lightblue;
+  background-color: #10b981;
   justify-content: space-between;
   color: white;
-  margin-bottom: 1rem;
+  font-family: sans-serif;
 
   a {
     color: white;
     text-decoration: none;
-    padding: 18px;
+    padding: 13px 18px;
     font-size: 21px;
+    font-weight: bold;
 
     &:hover {
       cursor: pointer;
-      color: #333;
+      opacity: 0.5;
     }
   }
 
