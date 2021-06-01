@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import Layout from '../../components/Layout'
+import { createClient } from 'contentful'
+// import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
-const client = require('contentful').createClient({
+const client = createClient({
   space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
   accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN,
 })
@@ -42,9 +44,6 @@ const Posts = (): JSX.Element => {
           ))
         : ''}
       <style>{`
-        h1 {
-          margin-left: 20px;
-        }
         .container {
           display: flex;
           height: 100px;
@@ -54,11 +53,11 @@ const Posts = (): JSX.Element => {
           margin-bottom: 48px;
           margin: 36px 100px;
           padding: 18px;
-          border: 2px solid blue;
+          border: 2px solid green;
         }
         img {
-          height: 200px;
-          width: 300px;
+          height: 160px;
+          width: 250px;
         }
         .post-container {
           display: flex;
