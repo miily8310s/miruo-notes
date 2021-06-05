@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import Layout from '../../components/Layout'
 import { createClient } from 'contentful'
-// import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import Link from 'next/link'
+import { getDate } from '../../utils'
 
 const client = createClient({
   space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
@@ -14,12 +15,12 @@ const Posts = (): JSX.Element => {
     return entries.items
   }
 
-  const getDate = (dateString: string) => {
-    const year = dateString.substr(0, 4) + '/'
-    const month = dateString.substr(4, 2) + '/'
-    const day = dateString.substr(6)
-    return year + month + day
-  }
+  // const getDate = (dateString: string) => {
+  //   const year = dateString.substr(0, 4) + '/'
+  //   const month = dateString.substr(4, 2) + '/'
+  //   const day = dateString.substr(6)
+  //   return year + month + day
+  // }
 
   const [posts, setPosts] = useState([])
   useEffect(() => {
@@ -34,13 +35,15 @@ const Posts = (): JSX.Element => {
       <h1>Posts</h1>
       {posts.length > 0
         ? posts.map((post) => (
-            <div className="container" key={post.alt}>
-              <img src={post.fields.image} />
-              <div className="post-container">
-                <h2>{post.fields.title}</h2>
-                <p>{getDate(post.fields.date)}</p>
+            <Link key={post.alt} href={'/posts/' + post.fields.slug}>
+              <div className="container">
+                <img src={post.fields.image} />
+                <div className="post-container">
+                  <h2>{post.fields.title}</h2>
+                  <p>{getDate(post.fields.date)}</p>
+                </div>
               </div>
-            </div>
+            </Link>
           ))
         : ''}
       <style>{`
@@ -50,7 +53,6 @@ const Posts = (): JSX.Element => {
           cursor: pointer;
           width: 90%;
           height: 200px;
-          margin-bottom: 48px;
           margin: 36px 100px;
           padding: 18px;
           border: 2px solid green;
