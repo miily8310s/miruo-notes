@@ -1,8 +1,10 @@
 .profile {
   width: 100%;
+  height: 92vh;
   overflow: hidden;
   display: flex;
   justify-content: center;
+  background-color: ghostwhite;
 
   &Box {
     width: 70%;

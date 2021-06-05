@@ -55,7 +55,7 @@ const Posts = (): JSX.Element => {
           height: 200px;
           margin: 36px 100px;
           padding: 18px;
-          border: 2px solid green;
+          box-shadow: -13px 8px 10px rgb(0 0 0 / 20%);
         }
         img {
           height: 160px;
