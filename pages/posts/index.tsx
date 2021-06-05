@@ -3,6 +3,7 @@ import Layout from '../../components/Layout'
 import { createClient } from 'contentful'
 import Link from 'next/link'
 import { getDate } from '../../utils'
+import { PostItem, PostFieldItem } from '../../types'
 
 const client = createClient({
   space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
@@ -11,16 +12,9 @@ const client = createClient({
 
 const Posts = (): JSX.Element => {
   const fetchPosts = async () => {
-    const entries = await client.getEntries()
+    const entries = await client.getEntries<PostItem>()
     return entries.items
   }
-
-  // const getDate = (dateString: string) => {
-  //   const year = dateString.substr(0, 4) + '/'
-  //   const month = dateString.substr(4, 2) + '/'
-  //   const day = dateString.substr(6)
-  //   return year + month + day
-  // }
 
   const [posts, setPosts] = useState([])
   useEffect(() => {
@@ -34,8 +28,8 @@ const Posts = (): JSX.Element => {
     <Layout>
       <h1>Posts</h1>
       {posts.length > 0
-        ? posts.map((post) => (
-            <Link key={post.alt} href={'/posts/' + post.fields.slug}>
+        ? posts.map((post: PostFieldItem) => (
+            <Link key={post.fields.alt} href={'/posts/' + post.fields.slug}>
               <div className="container">
                 <img src={post.fields.image} />
                 <div className="post-container">

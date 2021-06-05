@@ -4,6 +4,7 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import { createClient } from 'contentful'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { getDate } from '../../utils'
+import { PostItem, PostFieldItem } from '../../types'
 
 const client = createClient({
   space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
@@ -11,7 +12,7 @@ const client = createClient({
 })
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const entries = await client.getEntries({
+  const entries = await client.getEntries<PostItem>({
     content_type: 'title',
   })
   const paths = entries.items.map((item) => {
@@ -22,7 +23,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: true,
+    fallback: false,
   }
 }
 
@@ -47,10 +48,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 }
 
-const Post = ({ post }) => {
+const Post = ({ post }: { post: PostFieldItem }): JSX.Element => {
   return (
     <Layout>
-      <div className="container" key={post.alt}>
+      <div className="container" key={post.fields.alt}>
         <div className="post-container">
           <h1 className="title">{post.fields.title}</h1>
           <p className="date">{getDate(post.fields.date)}</p>
