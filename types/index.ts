@@ -1,7 +1,7 @@
 export interface PostItem {
   title: string
   slug: string
-  body: any
+  marked: string
   date: string
   alt: string
   image: string

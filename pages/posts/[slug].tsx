@@ -1,10 +1,11 @@
-// import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import Layout from '../../components/Layout'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { createClient } from 'contentful'
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { getDate } from '../../utils'
 import { PostItem, PostFieldItem } from '../../types'
+import Markdown from 'markdown-to-jsx'
+import Prism from 'prismjs'
 
 const client = createClient({
   space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
@@ -49,14 +50,20 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 }
 
 const Post = ({ post }: { post: PostFieldItem }): JSX.Element => {
+  useEffect(() => {
+    Prism.highlightAll()
+  })
   return (
     <Layout>
       <div className="container" key={post.fields.alt}>
         <div className="post-container">
           <h1 className="title">{post.fields.title}</h1>
           <p className="date">{getDate(post.fields.date)}</p>
-          <span className="create">created by miruo</span>
-          <p>{documentToReactComponents(post.fields.body)}</p>
+          {post.fields.marked ? (
+            <Markdown>{post.fields.marked}</Markdown>
+          ) : (
+            <p></p>
+          )}
         </div>
       </div>
       <style>{`
